@@ -14,14 +14,16 @@ import {
 import { home } from "./index";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL: string = "https://demo.magic-portfolio.com";
+const baseURL: string = "https://jahanzaibiqbal.com";
 
 const routes: RoutesConfig = {
   "/": true,
   "/about": true,
+  "/services": true,
   "/work": true,
   "/blog": true,
   "/gallery": true,
+  "/contact": true,
 };
 
 const display: DisplayConfig = {
@@ -32,9 +34,7 @@ const display: DisplayConfig = {
 
 // Enable password protection on selected routes
 // Set password in the .env file, refer to .env.example
-const protectedRoutes: ProtectedRoutesConfig = {
-  "/work/automate-design-handovers-with-a-figma-to-code-pipeline": true,
-};
+const protectedRoutes: ProtectedRoutesConfig = {};
 
 // Import and set font for each variant
 import { Geist } from "next/font/google";
@@ -187,17 +187,16 @@ const mailchimp: MailchimpConfig = {
 // default schema data
 const schema: SchemaConfig = {
   logo: "",
-  type: "Organization",
-  name: "Once UI",
+  type: "Person",
+  name: "Jahanzaib Iqbal",
   description: home.description,
-  email: "lorant@once-ui.com",
+  email: "jahanzaib@gsoftconsulting.com",
 };
 
 // social links
 const sameAs: SameAsConfig = {
-  threads: "https://www.threads.com/@once_ui",
-  linkedin: "https://www.linkedin.com/company/once-ui/",
-  discord: "https://discord.com/invite/5EyAQ4eNdS",
+  github: "https://github.com/jahanzaib-iqbal-dev",
+  linkedin: "https://www.linkedin.com/in/jahanzaib-iqbal-49a42b164/",
 };
 
 // social sharing configuration for blog posts

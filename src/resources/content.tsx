@@ -2,20 +2,22 @@ import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
+  firstName: "Jahanzaib",
+  lastName: "Iqbal",
+  name: `Jahanzaib Iqbal`,
+  role: "Co-founder & Director at Global Software Consulting",
   avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  email: "jahanzaib@gsoftconsulting.com",
+  location: "Asia/Karachi", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["English", "Urdu"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter: Newsletter = {
   display: true,
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  description: (
+    <>Insights on building startups, scaling engineering teams, and shipping great software</>
+  ),
 };
 
 const social: Social = [
@@ -25,25 +27,13 @@ const social: Social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system",
+    link: "https://github.com/jahanzaib-iqbal-dev",
     essential: true,
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
-    essential: true,
-  },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    link: "https://www.linkedin.com/in/jahanzaib-iqbal-49a42b164/",
     essential: true,
   },
   {
@@ -60,24 +50,29 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  headline: <>Helping startups build and scale high-quality software products</>,
   featured: {
-    display: true,
+    display: false,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">Global Software Consulting</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
           Featured work
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "/work",
   },
   subline: (
     <>
-    I'm Selene, a design engineer at <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
-</>
+      I'm Jahanzaib, co-founder at{" "}
+      <Text as="span" size="xl" weight="strong">
+        Global Software Consulting
+      </Text>
+      , where I lead 40+ engineers to take startups from MVP to production. I build, ship, and
+      scale.
+    </>
   ),
 };
 
@@ -94,7 +89,7 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false,
     link: "https://cal.com",
   },
   intro: {
@@ -102,9 +97,13 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Jahanzaib is a Lahore-based software leader and entrepreneur who has been building and
+        scaling software products since 2016. As Co-founder of Global Software Consulting, he leads
+        a team of 40+ engineers across five countries — Pakistan, Netherlands, Canada, UK, and
+        Australia — helping startups and growing businesses ship high-quality products from MVP to
+        production. His track record includes building a product from scratch to $1M+ ARR, and his
+        expertise spans full-stack development, AI integration, team leadership, and turning complex
+        technical challenges into shipped software.
       </>
     ),
   },
@@ -113,41 +112,57 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Global Software Consulting",
+        timeframe: "2016 - Present",
+        role: "Co-founder & Director",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Co-founded and scaled a software development company delivering high-quality products
+            for startups and growing businesses across multiple industries.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Built and manage a team of 40+ engineers, establishing engineering processes, code
+            quality standards, and delivery pipelines from the ground up.
+          </>,
+          <>
+            Drove the company's technical vision, helping clients go from initial MVP to
+            production-ready products with scalable architectures.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Obenan",
+        timeframe: "2022 - 2026",
+        role: "Technical Team Lead",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Led the development and technical execution of core products, managing both engineering
+            and business logic implementation across the platform.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Architected and delivered key product features using JavaScript, PostgreSQL, and modern
+            web technologies in a hybrid team across the Netherlands.
+          </>,
+          <>
+            Mentored and grew the engineering team, establishing best practices for code reviews,
+            testing, and continuous delivery.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Global Software Consulting",
+        timeframe: "2019 - 2022",
+        role: "Software Engineer",
+        achievements: [
+          <>
+            Built mobile and web applications using React Native, React.js, and Node.js, delivering
+            end-to-end solutions for clients.
+          </>,
+          <>
+            Gained deep hands-on experience across the full stack, contributing to projects ranging
+            from consumer apps to enterprise platforms.
           </>,
         ],
         images: [],
@@ -155,78 +170,99 @@ const about: About = {
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
+    display: false, // hidden as requested
     title: "Studies",
-    institutions: [
-      {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
-      },
-    ],
+    institutions: [],
   },
   technical: {
     display: true, // set to false to hide this section
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
+        title: "Frontend",
         description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+          <>
+            Building modern, responsive interfaces with React, Next.js, and React Native for web and
+            mobile.
+          </>
         ),
         tags: [
           {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
+            name: "React",
+            icon: "react",
           },
           {
             name: "Next.js",
             icon: "nextjs",
           },
           {
-            name: "Supabase",
-            icon: "supabase",
+            name: "React Native",
+            icon: "react",
+          },
+          {
+            name: "TypeScript",
+            icon: "typescript",
           },
         ],
         // optional: leave the array empty if you don't want to display images
-        images: [
+        images: [],
+      },
+      {
+        title: "Backend & Infrastructure",
+        description: (
+          <>
+            Designing scalable backends and infrastructure with Node.js, PostgreSQL, MongoDB, AWS,
+            and Docker.
+          </>
+        ),
+        tags: [
           {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
+            name: "Node.js",
+            icon: "nodejs",
+          },
+          {
+            name: "PostgreSQL",
+            icon: "postgresql",
+          },
+          {
+            name: "MongoDB",
+            icon: "mongodb",
+          },
+          {
+            name: "AWS",
+            icon: "aws",
+          },
+          {
+            name: "Docker",
+            icon: "docker",
           },
         ],
+        // optional: leave the array empty if you don't want to display images
+        images: [],
+      },
+      {
+        title: "AI & Automation",
+        description: (
+          <>
+            Building AI agents, MCP servers, RAG pipelines, and LLM integrations with Claude,
+            OpenAI, and Gemini.
+          </>
+        ),
+        tags: [
+          {
+            name: "Claude",
+          },
+          {
+            name: "OpenAI",
+          },
+          {
+            name: "LangChain",
+          },
+          {
+            name: "MCP Servers",
+          },
+        ],
+        images: [],
       },
     ],
   },
@@ -235,7 +271,7 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
+  title: "Writing about software, startups, and engineering leadership...",
   description: `Read what ${person.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route
@@ -245,7 +281,7 @@ const work: Work = {
   path: "/work",
   label: "Work",
   title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
+  description: `Software projects and products by ${person.name}`,
   // Create new project pages by adding a new .mdx file to app/blog/posts
   // All projects will be listed on the /home and /work routes
 };
@@ -255,7 +291,6 @@ const gallery: Gallery = {
   label: "Gallery",
   title: `Photo gallery – ${person.name}`,
   description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
   // These are placeholder images, replace with your own
   images: [
     {
