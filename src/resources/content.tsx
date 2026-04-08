@@ -9,7 +9,7 @@ const person: Person = {
   avatar: "/images/avatar.jpg",
   email: "jahanzaib@gsoftconsulting.com",
   location: "Asia/Karachi", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Urdu"], // optional: Leave the array empty if you don't want to display languages
+  languages: [], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter: Newsletter = {
@@ -50,7 +50,7 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Helping startups build and scale high-quality software products</>,
+  headline: <>I build products, lead teams, and ship software that scales</>,
   featured: {
     display: false,
     title: (
@@ -66,12 +66,12 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm Jahanzaib, co-founder at{" "}
+      Software engineer turned founder. Co-founded{" "}
       <Text as="span" size="xl" weight="strong">
         Global Software Consulting
       </Text>
-      , where I lead 40+ engineers to take startups from MVP to production. I build, ship, and
-      scale.
+      , built Obenan from zero to $1M+ ARR, and now leading 40+ engineers. I specialize in React,
+      Node.js, and AI — but my real skill is shipping products that scale.
     </>
   ),
 };
@@ -89,21 +89,18 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: false,
-    link: "https://cal.com",
+    display: true,
+    link: "https://calendly.com/jahanzaib-gsoftconsulting/30min",
   },
   intro: {
     display: true,
     title: "Introduction",
     description: (
       <>
-        Jahanzaib is a Lahore-based software leader and entrepreneur who has been building and
-        scaling software products since 2016. As Co-founder of Global Software Consulting, he leads
-        a team of 40+ engineers across five countries — Pakistan, Netherlands, Canada, UK, and
-        Australia — helping startups and growing businesses ship high-quality products from MVP to
-        production. His track record includes building a product from scratch to $1M+ ARR, and his
-        expertise spans full-stack development, AI integration, team leadership, and turning complex
-        technical challenges into shipped software.
+        Software engineer turned founder. I co-founded Global Software Consulting in 2026 and built
+        it into a 40+ person engineering team. My proudest build: taking Obenan from zero to $1M+
+        ARR as the technical lead. I specialize in React, Node.js, and AI — but my real skill is
+        shipping products that scale and building teams that last.
       </>
     ),
   },
@@ -113,7 +110,7 @@ const about: About = {
     experiences: [
       {
         company: "Global Software Consulting",
-        timeframe: "2016 - Present",
+        timeframe: "2026 - Present",
         role: "Co-founder & Director",
         achievements: [
           <>
@@ -271,7 +268,7 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about software, startups, and engineering leadership...",
+  title: "Blog",
   description: `Read what ${person.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route

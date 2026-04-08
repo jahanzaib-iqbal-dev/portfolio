@@ -1,0 +1,59 @@
+---
+title: "What I Learned Building a Product from Zero to $1M+ ARR"
+publishedAt: "2026-04-01"
+summary: "The technical and leadership lessons from building Obenan's local SEO platform from the first line of code to a revenue-generating product with thousands of users."
+tag: "Product"
+---
+
+## The Beginning
+
+In early 2022, I joined Obenan as the first technical hire. There was no codebase, no architecture, no team — just a clear vision from the founders and a market opportunity in local SEO.
+
+Four years later, the platform serves thousands of businesses, generates over $1M in annual recurring revenue, and runs on an architecture that has scaled without a single major rewrite.
+
+Here's what I learned along the way.
+
+## Architectural Decisions That Paid Off
+
+### 1. Build for Production from Day One
+
+The temptation with MVPs is to cut corners — "we'll fix it later." We didn't. Every database migration was backward-compatible. Every API endpoint was versioned. Every service had proper error handling.
+
+This wasn't slower. It was actually faster in the long run because we never had to stop and rewrite.
+
+### 2. PostgreSQL Over Everything
+
+We chose PostgreSQL early and leaned into it heavily — JSONB columns for flexible schemas, proper indexing strategies, and materialized views for analytics. When NoSQL was trendy, we stuck with what we knew would scale reliably.
+
+### 3. Invest in CI/CD Early
+
+Automated testing and deployment pipelines were set up in the first month. This paid dividends every single day after that. By the time we had a team, the deployment process was already battle-tested.
+
+## Leadership Lessons
+
+### Hire for Ownership, Not Just Skill
+
+The engineers who made the biggest impact weren't necessarily the most experienced — they were the ones who treated the product like their own. Ownership mindset beats technical skill every time.
+
+### Code Reviews Are Culture
+
+We established code review as a non-negotiable practice from day one. It wasn't about gatekeeping — it was about knowledge sharing. Every PR was a teaching moment.
+
+### Ship Weekly, Demo Weekly
+
+We maintained a weekly demo cadence with the founders throughout the entire journey. This kept alignment tight and feedback loops short. No feature ever went more than a week without being seen by stakeholders.
+
+## The Numbers
+
+- **0 to $1M+ ARR** in under 4 years
+- **Zero major rewrites** — the original architecture scaled
+- **Team grew from 1 to 8** engineers under my leadership
+- **Thousands of businesses** actively using the platform
+
+## What I'd Do Differently
+
+Honestly? Not much. But if I had to pick one thing: I'd invest in observability earlier. We added proper logging and monitoring about 6 months in. Those first 6 months of debugging in the dark were unnecessarily painful.
+
+## The Takeaway
+
+Building a product from zero to $1M+ ARR taught me that the hardest problems aren't technical — they're about making the right decisions at the right time with incomplete information. The code is the easy part. The judgment is what matters.

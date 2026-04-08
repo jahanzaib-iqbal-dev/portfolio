@@ -16,12 +16,12 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
       fillWidth
       key={post.slug}
       href={`/blog/${post.slug}`}
-      transition="micro-medium"
+      transition="macro-medium"
       direction={direction}
-      border="transparent"
-      background="transparent"
+      border="neutral-alpha-weak"
+      background="neutral-alpha-weak"
       padding="4"
-      radius="l-4"
+      radius="l"
       gap={direction === "column" ? undefined : "24"}
       s={{ direction: "column" }}
     >

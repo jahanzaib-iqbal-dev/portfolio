@@ -65,7 +65,7 @@ export const Header = () => {
         as="header"
         zIndex={9}
         fillWidth
-        padding="8"
+        padding="12"
         horizontal="center"
         data-border="rounded"
         s={{
@@ -166,21 +166,21 @@ export const Header = () => {
                   </Row>
                 </>
               )}
-              {routes["/gallery"] && (
+              {routes["/team"] && (
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
-                      prefixIcon="gallery"
-                      href="/gallery"
-                      label={gallery.label}
-                      selected={pathname.startsWith("/gallery")}
+                      prefixIcon="person"
+                      href="/team"
+                      label="Team"
+                      selected={pathname.startsWith("/team")}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
-                      prefixIcon="gallery"
-                      href="/gallery"
-                      selected={pathname.startsWith("/gallery")}
+                      prefixIcon="person"
+                      href="/team"
+                      selected={pathname.startsWith("/team")}
                     />
                   </Row>
                 </>

@@ -1,5 +1,8 @@
-import { Button, Column, Heading, Icon, Tag, Text, Meta, Schema, Row } from "@once-ui-system/core";
+"use client";
+
+import { Button, Column, Heading, Icon, Tag, Text, Meta, Row } from "@once-ui-system/core";
 import { baseURL, person } from "@/resources";
+import { motion } from "framer-motion";
 
 const services = {
   path: "/services",
@@ -58,41 +61,25 @@ const offerings = [
   },
 ];
 
-const process = [
-  { step: "Discovery", description: "Understand your goals, constraints, and users." },
-  { step: "Design", description: "Architecture, wireframes, and technical planning." },
-  { step: "Build", description: "Iterative development with weekly demos." },
-  { step: "Launch", description: "Deploy, monitor, and go live with confidence." },
-  { step: "Support", description: "Ongoing maintenance, optimization, and scaling." },
-];
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1 },
+  },
+};
 
-export async function generateMetadata() {
-  return Meta.generate({
-    title: services.title,
-    description: services.description,
-    baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(services.title)}`,
-    path: services.path,
-  });
-}
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 80, damping: 14 },
+  },
+};
 
 export default function Services() {
   return (
     <Column maxWidth="m">
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        title={services.title}
-        description={services.description}
-        path={services.path}
-        image={`/api/og/generate?title=${encodeURIComponent(services.title)}`}
-        author={{
-          name: person.name,
-          url: `${baseURL}${services.path}`,
-          image: `${baseURL}${person.avatar}`,
-        }}
-      />
-
       <Column fillWidth>
         {/* Header */}
         <Column fillWidth minHeight="160" vertical="center" marginBottom="32">
@@ -103,124 +90,121 @@ export default function Services() {
         </Column>
 
         {/* Service Cards */}
-        <Row
-          fillWidth
-          marginBottom="xl"
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--static-space-20)" }}
-          s={{ style: { gridTemplateColumns: "1fr" } }}
+        <motion.div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "var(--static-space-20)",
+            width: "100%",
+            marginBottom: "var(--static-space-40)",
+          }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
         >
           {offerings.map((offering, index) => (
-            <Column
+            <motion.div
               key={`${offering.title}-${index}`}
-              fillWidth
-              padding="l"
-              border="neutral-alpha-weak"
-              radius="l"
-              gap="m"
-              background="neutral-alpha-weak"
+              variants={cardVariants}
+              whileHover={{
+                y: -8,
+                transition: { type: "spring", stiffness: 300, damping: 20 },
+              }}
+              style={{
+                borderRadius: "var(--radius-l)",
+                overflow: "hidden",
+              }}
             >
-              <Row vertical="center" gap="12">
-                <Icon name={offering.icon} onBackground="accent-weak" size="m" />
-                <Heading as="h2" variant="heading-strong-l">
-                  {offering.title}
-                </Heading>
-              </Row>
-              <Text variant="body-default-m">{offering.description}</Text>
-              <Row vertical="center" gap="8" wrap>
-                <Text variant="body-default-s" onBackground="brand-weak">
-                  Best for:
-                </Text>
-                <Text variant="body-default-s" onBackground="neutral-weak">
-                  {offering.bestFor}
-                </Text>
-              </Row>
-              {offering.tags.length > 0 && (
-                <Row wrap gap="8">
-                  {offering.tags.map((tag, tagIndex) => (
-                    <Tag key={`${offering.title}-tag-${tagIndex}`} size="l">
-                      {tag}
-                    </Tag>
-                  ))}
-                </Row>
-              )}
-            </Column>
-          ))}
-        </Row>
-
-        {/* How We Work */}
-        <Heading as="h2" variant="display-strong-s" marginBottom="m">
-          How We Work
-        </Heading>
-        <Column fillWidth gap="l" marginBottom="xl">
-          {process.map((item, index) => (
-            <Row key={`process-${index}`} fillWidth gap="16" vertical="center">
               <Column
-                horizontal="center"
-                vertical="center"
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  flexShrink: 0,
-                }}
-                border="brand-medium"
-                background="brand-alpha-weak"
+                fillWidth
+                padding="l"
+                border="neutral-alpha-weak"
+                radius="l"
+                gap="m"
+                background="neutral-alpha-weak"
+                style={{ height: "100%" }}
               >
-                <Text variant="heading-strong-s" onBackground="brand-weak">
-                  {index + 1}
-                </Text>
-              </Column>
-              <Column gap="4">
-                <Text variant="heading-strong-l">{item.step}</Text>
+                <Row vertical="center" gap="12">
+                  <Column
+                    horizontal="center"
+                    vertical="center"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "12px",
+                      flexShrink: 0,
+                    }}
+                    background="brand-alpha-weak"
+                    border="brand-alpha-medium"
+                  >
+                    <Icon name={offering.icon} onBackground="brand-strong" size="s" />
+                  </Column>
+                  <Heading as="h2" variant="heading-strong-l">
+                    {offering.title}
+                  </Heading>
+                </Row>
                 <Text variant="body-default-m" onBackground="neutral-weak">
-                  {item.description}
+                  {offering.description}
                 </Text>
+                <Row vertical="center" gap="8" wrap>
+                  <Text variant="body-default-s" onBackground="brand-strong">
+                    Best for:
+                  </Text>
+                  <Text variant="body-default-s" onBackground="neutral-weak">
+                    {offering.bestFor}
+                  </Text>
+                </Row>
+                {offering.tags.length > 0 && (
+                  <Row wrap gap="8" style={{ marginTop: "auto" }}>
+                    {offering.tags.map((tag, tagIndex) => (
+                      <Tag key={`${offering.title}-tag-${tagIndex}`} size="l">
+                        {tag}
+                      </Tag>
+                    ))}
+                  </Row>
+                )}
               </Column>
-            </Row>
+            </motion.div>
           ))}
-        </Column>
-
-        {/* Process Flow */}
-        <Row fillWidth horizontal="center" gap="8" wrap marginBottom="xl">
-          {process.map((item, index) => (
-            <Row key={`flow-${index}`} vertical="center" gap="8">
-              <Tag size="l">{item.step}</Tag>
-              {index < process.length - 1 && (
-                <Icon name="chevronRight" onBackground="neutral-weak" size="s" />
-              )}
-            </Row>
-          ))}
-        </Row>
+        </motion.div>
 
         {/* CTA */}
-        <Column
-          fillWidth
-          horizontal="center"
-          align="center"
-          padding="xl"
-          radius="xl"
-          border="brand-alpha-medium"
-          background="brand-alpha-weak"
-          gap="m"
-          marginBottom="xl"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 80, damping: 14, delay: 0.2 }}
         >
-          <Heading as="h2" variant="display-strong-s" align="center" wrap="balance">
-            Ready to build something great?
-          </Heading>
-          <Text variant="body-default-l" onBackground="neutral-weak" align="center" wrap="balance">
-            Let&apos;s discuss your project and find the right engagement model for your team.
-          </Text>
-          <Row paddingTop="12">
-            <Button
-              href={`mailto:${person.email}`}
-              label="Let's Build Together"
-              variant="primary"
-              size="l"
-              prefixIcon="email"
-              data-border="rounded"
-            />
-          </Row>
-        </Column>
+          <Column
+            fillWidth
+            horizontal="center"
+            align="center"
+            padding="xl"
+            radius="xl"
+            border="brand-alpha-medium"
+            background="brand-alpha-weak"
+            gap="m"
+            marginBottom="xl"
+          >
+            <Heading as="h2" variant="display-strong-s" align="center" wrap="balance">
+              Ready to build something great?
+            </Heading>
+            <Text variant="body-default-l" onBackground="neutral-weak" align="center" wrap="balance">
+              Let&apos;s discuss your project and find the right engagement model for your team.
+            </Text>
+            <Row paddingTop="12">
+              <Button
+                href={`mailto:${person.email}`}
+                label="Let's Build Together"
+                variant="primary"
+                size="l"
+                prefixIcon="email"
+                data-border="rounded"
+              />
+            </Row>
+          </Column>
+        </motion.div>
       </Column>
     </Column>
   );
