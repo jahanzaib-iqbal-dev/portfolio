@@ -73,7 +73,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 80, damping: 14 },
+    transition: { type: "spring" as const, stiffness: 80, damping: 14 },
   },
 };
 
@@ -190,7 +190,12 @@ export default function Services() {
             <Heading as="h2" variant="display-strong-s" align="center" wrap="balance">
               Ready to build something great?
             </Heading>
-            <Text variant="body-default-l" onBackground="neutral-weak" align="center" wrap="balance">
+            <Text
+              variant="body-default-l"
+              onBackground="neutral-weak"
+              align="center"
+              wrap="balance"
+            >
               Let&apos;s discuss your project and find the right engagement model for your team.
             </Text>
             <Row paddingTop="12">
