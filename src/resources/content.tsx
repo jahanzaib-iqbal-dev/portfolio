@@ -13,7 +13,7 @@ const person: Person = {
 };
 
 const newsletter: Newsletter = {
-  display: true,
+  display: false,
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
   description: (
     <>Insights on building startups, scaling engineering teams, and shipping great software</>
@@ -80,7 +80,7 @@ const about: About = {
   path: "/about",
   label: "About",
   title: `About – ${person.name}`,
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  description: `Meet ${person.name}, ${person.role} from Lahore, Pakistan`,
   tableOfContent: {
     display: true,
     subItems: false,
@@ -279,7 +279,7 @@ const work: Work = {
   label: "Work",
   title: `Projects – ${person.name}`,
   description: `Software projects and products by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
+  // Create new project pages by adding a new .mdx file to app/work/projects
   // All projects will be listed on the /home and /work routes
 };
 

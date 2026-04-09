@@ -129,21 +129,21 @@ export default function Home() {
           <Row vertical="center" gap="8">
             <Icon name="refresh" size="s" onBackground="brand-strong" />
             <Text variant="heading-strong-m" onBackground="brand-strong">
-              What I&apos;m focused on now
-            </Text>
-            <Text variant="body-default-xs" onBackground="neutral-weak">
-              — April 2026
+              What I&apos;m focused on
             </Text>
           </Row>
           <Column as="ul" gap="8" paddingLeft="4">
             <Text as="li" variant="body-default-m">
-              Scaling AI agent tooling and MCP server development at Global Software Consulting
+              AI agents, MCP servers &amp; agentic workflows — building the tooling layer for the
+              next era of software
             </Text>
             <Text as="li" variant="body-default-m">
-              Building open-source developer tools — project scaffolding skills for Claude Code
+              Helping startups go from zero to production with scalable architectures and lean
+              engineering teams
             </Text>
             <Text as="li" variant="body-default-m">
-              Writing about engineering leadership and taking products from zero to $1M+ ARR
+              Open-source developer tools &amp; sharing what I learn about engineering leadership at
+              scale
             </Text>
           </Column>
         </Column>

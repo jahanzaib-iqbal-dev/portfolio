@@ -33,7 +33,7 @@ const contactLinks = [
     icon: "linkedin",
     label: "LinkedIn",
     value: "Connect on LinkedIn",
-    href: "https://linkedin.com/in/jahanzaib-iqbal-49a42b164/",
+    href: "https://www.linkedin.com/in/jahanzaib-iqbal-49a42b164/",
   },
   {
     icon: "github",
