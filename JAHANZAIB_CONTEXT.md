@@ -15,7 +15,7 @@
 | **LinkedIn** | https://www.linkedin.com/in/jahanzaib-iqbal-49a42b164/ |
 | **GitHub (Personal)** | https://github.com/jahanzaib-iqbal-dev |
 | **GitHub (Company)** | https://github.com/Global-Software-Consulting |
-| **Portfolio** | https://jahanzaib-iqbal-portfolio.vercel.app |
+| **Portfolio** | https://jahanzaibiqbal.com |
 | **Company Website** | https://gsoftconsulting.com |
 | **Calendly** | https://calendly.com/jahanzaib-gsoftconsulting/30min |
 
@@ -71,11 +71,12 @@ Product engineering company that builds, ships, and scales software for startups
 3. **Team Augmentation** — Senior engineers embedded in client's existing team, tools, sprints, codebase. Best for scaling fast, filling skill gaps.
 
 ### Services
-1. **Product Engineering** — Full-stack web and mobile apps (React, Next.js, React Native, Node.js, NestJS)
-2. **AI & Intelligent Automation** — AI agents (Claude, OpenAI, Gemini), MCP servers, RAG pipelines, LLM integration, NLP, computer vision
-3. **UI/UX Design** — User research, wireframing, Figma prototyping, design systems, responsive design
-4. **QA & Reliability** — TDD, automated testing, performance testing, security audits, CI/CD with quality gates
-5. **Cloud & DevOps** — AWS, GCP, Azure, Docker, GitHub Actions, Jenkins, Nginx
+1. **Your IT Partner** — Dedicated tech team, handles architecture to deployment. Best for startups without a CTO or in-house dev team.
+2. **MVP Development** — From idea validation to launch-ready product. Production-grade from day one, no throwaway code.
+3. **Product Scaling** — Take a proven product to the next level. Performance, microservices, infrastructure.
+4. **Team Augmentation** — Senior engineers embedded in client's existing team, tools, sprints, codebase.
+5. **AI & Intelligent Automation** — AI agents (Claude, OpenAI, Gemini), MCP servers, RAG pipelines, LLM integration, NLP, computer vision.
+6. **UI/UX Design & Prototyping** — User research, wireframing, Figma prototyping, design systems, responsive design.
 
 ### Industries Served
 - HealthTech (telemedicine, EHR integration)
@@ -170,15 +171,18 @@ Jest, Vitest, Mocha, Postman
 |------|-----|---------|
 | Home | / | Personal hero, currently/now, things built, blog, stats, tech marquee |
 | About | /about | Full bio, work experience, technical skills with logos, calendar booking |
-| Services | /services | 6 service offerings with animations, CTA |
-| Work | /work | Case studies (Obenan) |
+| Services | /services | 6 service offerings with animations and CTA (Your IT Partner, MVP Dev, Product Scaling, Team Augmentation, AI & Automation, UI/UX) |
+| Work | /work | Case studies (Obenan $1M+ ARR) |
 | Blog | /blog | Engineering leadership and product articles |
-| Team | /team | Company page — team photo, stats, capabilities, industries, offices |
-| Contact | /contact | Calendly embed, email/LinkedIn/GitHub links |
+| Team | /team | Company page — team stats (40+ engineers, 5 countries, 155+ projects), capabilities, industries, offices |
+| Contact | /contact | Calendly embed (30min call booking), email/LinkedIn/GitHub links |
 
-**Tech:** Next.js 16, React 19, Once UI, TypeScript, Sass, Framer Motion, MDX
-**Hosting:** Vercel (jahanzaib-iqbal-portfolio.vercel.app)
-**Domain:** jahanzaibiqbal.com (pending DNS setup)
+**i18n:** Full 30-language support (Chinese, Hindi, Spanish, French, Arabic, and 25 more). Language switcher in nav. Client-side, uses localStorage + URL param.
+**Mobile nav:** Hamburger menu → bottom sheet drawer with all routes. Fully responsive.
+
+**Tech:** Next.js 16, React 19, Once UI, TypeScript, Sass, Framer Motion, MDX, i18n (30 languages)
+**Hosting:** Vercel
+**Domain:** https://jahanzaibiqbal.com (live)
 **Repo:** https://github.com/jahanzaib-iqbal-dev/portfolio
 
 ---
