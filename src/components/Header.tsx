@@ -3,15 +3,17 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
+import { Fade, Flex, Line, Row, ToggleButton, Column, Text, Icon } from "@once-ui-system/core";
 
-import { routes, display, person, about, blog, work, gallery } from "@/resources";
+import { routes, display, person } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage } from "@/i18n/LanguageContext";
 import styles from "./Header.module.scss";
 
 type TimeDisplayProps = {
   timeZone: string;
-  locale?: string; // Optionally allow locale, defaulting to 'en-GB'
+  locale?: string;
 };
 
 const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" }) => {
@@ -33,7 +35,6 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" })
 
     updateTime();
     const intervalId = setInterval(updateTime, 1000);
-
     return () => clearInterval(intervalId);
   }, [timeZone, locale]);
 
@@ -44,6 +45,35 @@ export default TimeDisplay;
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const { t } = useLanguage();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  const navItems = [
+    { path: "/", icon: "home", label: t("nav.home"), exact: true },
+    { path: "/about", icon: "person", label: t("nav.about") },
+    { path: "/work", icon: "grid", label: t("nav.work") },
+    { path: "/blog", icon: "book", label: t("nav.blog") },
+    { path: "/services", icon: "sparkle", label: t("nav.services") },
+    { path: "/team", icon: "person", label: t("nav.team") },
+    { path: "/contact", icon: "email", label: t("nav.contact") },
+  ].filter((item) => routes[item.path as keyof typeof routes]);
 
   return (
     <>
@@ -58,6 +88,128 @@ export const Header = () => {
         height="80"
         zIndex={9}
       />
+
+      {/* ── Mobile full-screen menu overlay ── */}
+      {isMenuOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 200,
+            backgroundColor: "rgba(0,0,0,0.6)",
+            backdropFilter: "blur(4px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+          }}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <div
+            style={{
+              backgroundColor: "var(--page-background)",
+              borderRadius: "var(--radius-xl) var(--radius-xl) 0 0",
+              padding: "16px 16px calc(100px + env(safe-area-inset-bottom))",
+              boxShadow: "0 -8px 40px rgba(0,0,0,0.4)",
+              animation: "slideUp 0.25s ease-out",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Drag handle */}
+            <div
+              style={{
+                width: 40,
+                height: 4,
+                borderRadius: 2,
+                backgroundColor: "var(--neutral-alpha-medium)",
+                margin: "0 auto 20px",
+              }}
+            />
+
+            {/* Nav links */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {navItems.map((item) => {
+                const isSelected = item.exact
+                  ? pathname === item.path
+                  : pathname.startsWith(item.path);
+                return (
+                  <a
+                    key={item.path}
+                    href={item.path}
+                    style={{ textDecoration: "none" }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 16,
+                        padding: "14px 16px",
+                        borderRadius: "var(--radius-m)",
+                        backgroundColor: isSelected ? "var(--neutral-alpha-weak)" : "transparent",
+                        transition: "background-color 0.15s",
+                      }}
+                    >
+                      <Icon
+                        name={item.icon}
+                        size="m"
+                        onBackground={isSelected ? "neutral-strong" : "neutral-weak"}
+                      />
+                      <span
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: isSelected ? 600 : 400,
+                          color: isSelected
+                            ? "var(--neutral-on-background-strong)"
+                            : "var(--neutral-on-background-weak)",
+                        }}
+                      >
+                        {item.label}
+                      </span>
+                      {isSelected && (
+                        <div style={{ marginLeft: "auto" }}>
+                          <Icon name="check" size="s" onBackground="brand-strong" />
+                        </div>
+                      )}
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Divider + utilities */}
+            <div
+              style={{
+                height: 1,
+                backgroundColor: "var(--neutral-alpha-weak)",
+                margin: "12px 0",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "8px 16px",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--neutral-on-background-weak)",
+                }}
+              >
+                {display.time && <TimeDisplay timeZone={person.location} />}
+              </span>
+              <div style={{ display: "flex", gap: 8 }}>
+                {display.themeSwitcher && <ThemeToggle />}
+                <LanguageToggle />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Header bar ── */}
       <Row
         fitHeight
         className={styles.position}
@@ -68,13 +220,12 @@ export const Header = () => {
         padding="12"
         horizontal="center"
         data-border="rounded"
-        s={{
-          position: "fixed",
-        }}
+        s={{ position: "fixed" }}
       >
         <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
           {display.location && <Row s={{ hide: true }}>{person.location}</Row>}
         </Row>
+
         <Row fillWidth horizontal="center">
           <Row
             background="page"
@@ -85,124 +236,65 @@ export const Header = () => {
             horizontal="center"
             zIndex={1}
           >
-            <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
+            {/* ── Desktop nav ── */}
+            <Row
+              gap="4"
+              vertical="center"
+              textVariant="body-default-s"
+              suppressHydrationWarning
+              s={{ hide: true }}
+            >
               {routes["/"] && (
                 <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
               )}
               <Line background="neutral-alpha-medium" vert maxHeight="24" />
               {routes["/about"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      label={about.label}
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                </>
+                <ToggleButton
+                  prefixIcon="person"
+                  href="/about"
+                  label={t("nav.about")}
+                  selected={pathname === "/about"}
+                />
               )}
               {routes["/work"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/work"
-                      label={work.label}
-                      selected={pathname.startsWith("/work")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/work"
-                      selected={pathname.startsWith("/work")}
-                    />
-                  </Row>
-                </>
+                <ToggleButton
+                  prefixIcon="grid"
+                  href="/work"
+                  label={t("nav.work")}
+                  selected={pathname.startsWith("/work")}
+                />
               )}
               {routes["/blog"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/blog"
-                      label={blog.label}
-                      selected={pathname.startsWith("/blog")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/blog"
-                      selected={pathname.startsWith("/blog")}
-                    />
-                  </Row>
-                </>
+                <ToggleButton
+                  prefixIcon="book"
+                  href="/blog"
+                  label={t("nav.blog")}
+                  selected={pathname.startsWith("/blog")}
+                />
               )}
               {routes["/services"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/services"
-                      label="Services"
-                      selected={pathname.startsWith("/services")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/services"
-                      selected={pathname.startsWith("/services")}
-                    />
-                  </Row>
-                </>
+                <ToggleButton
+                  prefixIcon="sparkle"
+                  href="/services"
+                  label={t("nav.services")}
+                  selected={pathname.startsWith("/services")}
+                />
               )}
               {routes["/team"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/team"
-                      label="Team"
-                      selected={pathname.startsWith("/team")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/team"
-                      selected={pathname.startsWith("/team")}
-                    />
-                  </Row>
-                </>
+                <ToggleButton
+                  prefixIcon="person"
+                  href="/team"
+                  label={t("nav.team")}
+                  selected={pathname.startsWith("/team")}
+                />
               )}
               {routes["/contact"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="email"
-                      href="/contact"
-                      label="Contact"
-                      selected={pathname.startsWith("/contact")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="email"
-                      href="/contact"
-                      selected={pathname.startsWith("/contact")}
-                    />
-                  </Row>
-                </>
+                <ToggleButton
+                  prefixIcon="email"
+                  href="/contact"
+                  label={t("nav.contact")}
+                  selected={pathname.startsWith("/contact")}
+                />
               )}
               {display.themeSwitcher && (
                 <>
@@ -210,9 +302,60 @@ export const Header = () => {
                   <ThemeToggle />
                 </>
               )}
+              <Line background="neutral-alpha-medium" vert maxHeight="24" />
+              <LanguageToggle />
+            </Row>
+
+            {/* ── Mobile nav: Home + Hamburger + Language ── */}
+            <Row
+              hide
+              s={{ hide: false }}
+              gap="4"
+              vertical="center"
+              textVariant="body-default-s"
+              suppressHydrationWarning
+            >
+              {routes["/"] && (
+                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
+              )}
+              <Line background="neutral-alpha-medium" vert maxHeight="24" />
+              <LanguageToggle />
+              <Line background="neutral-alpha-medium" vert maxHeight="24" />
+              <button
+                onClick={() => setIsMenuOpen((v) => !v)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "6px 10px",
+                  borderRadius: "var(--radius-s)",
+                  color: "var(--neutral-on-background-strong)",
+                }}
+                aria-label="Open navigation menu"
+              >
+                {isMenuOpen ? (
+                  <Icon name="close" size="m" />
+                ) : (
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <rect y="3" width="20" height="2" rx="1" />
+                    <rect y="9" width="20" height="2" rx="1" />
+                    <rect y="15" width="20" height="2" rx="1" />
+                  </svg>
+                )}
+              </button>
             </Row>
           </Row>
         </Row>
+
         <Flex fillWidth horizontal="end" vertical="center">
           <Flex
             paddingRight="12"
@@ -227,6 +370,13 @@ export const Header = () => {
           </Flex>
         </Flex>
       </Row>
+
+      <style>{`
+        @keyframes slideUp {
+          from { transform: translateY(100%); opacity: 0; }
+          to   { transform: translateY(0);    opacity: 1; }
+        }
+      `}</style>
     </>
   );
 };

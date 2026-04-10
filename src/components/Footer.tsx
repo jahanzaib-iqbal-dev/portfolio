@@ -1,9 +1,13 @@
+"use client";
+
 import { Row, Column, IconButton, Button, Text, Heading } from "@once-ui-system/core";
 import { person, social } from "@/resources";
+import { useLanguage } from "@/i18n/LanguageContext";
 import styles from "./Footer.module.scss";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <Column as="footer" fillWidth padding="8" horizontal="center">
@@ -27,20 +31,20 @@ export const Footer = () => {
           {/* Left — Message */}
           <Column gap="16" flex={1}>
             <Heading as="h2" variant="heading-strong-xl">
-              I&apos;m always open to conversations
+              {t("footer.title")}
             </Heading>
             <Text variant="body-default-m" onBackground="neutral-weak">
-              Whether it&apos;s about engineering, building products,
+              {t("footer.desc.1")}
               <br />
-              scaling teams, or just talking shop — I&apos;d love to hear from you.
+              {t("footer.desc.2")}
             </Text>
             <Row gap="16" paddingTop="8" wrap vertical="center" fillWidth horizontal="between">
               <Row gap="16" wrap vertical="center">
                 <Button href="/contact" variant="primary" size="m" data-border="rounded" arrowIcon>
-                  Let&apos;s Talk
+                  {t("footer.cta.talk")}
                 </Button>
                 <Button href="/team" variant="secondary" size="m" data-border="rounded" arrowIcon>
-                  Looking to hire my team?
+                  {t("footer.cta.team")}
                 </Button>
               </Row>
               <Row gap="8">

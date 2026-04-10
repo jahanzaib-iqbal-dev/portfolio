@@ -3,7 +3,6 @@ import {
   Button,
   Column,
   Heading,
-  Icon,
   IconButton,
   Media,
   Tag,
@@ -15,6 +14,8 @@ import {
 import { baseURL, about, person, social } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
+import { ScheduleCallButton } from "@/components/ScheduleCallButton";
+import { ClientHeading } from "@/components/ClientHeading";
 import React from "react";
 
 const techLogos: Record<string, string> = {
@@ -111,29 +112,7 @@ export default function About() {
             horizontal="center"
           >
             <Avatar src={person.avatar} size="xl" />
-            {about.calendar.display && (
-              <Row
-                fitWidth
-                border="brand-alpha-medium"
-                background="brand-alpha-weak"
-                radius="full"
-                padding="4"
-                gap="8"
-                vertical="center"
-                style={{
-                  backdropFilter: "blur(var(--static-space-1))",
-                }}
-              >
-                <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                <Row paddingX="8">Schedule a call</Row>
-                <IconButton
-                  href={about.calendar.link}
-                  data-border="rounded"
-                  variant="secondary"
-                  icon="chevronRight"
-                />
-              </Row>
-            )}
+            {about.calendar.display && <ScheduleCallButton href={about.calendar.link} />}
             {person.languages && person.languages.length > 0 && (
               <Row wrap gap="8">
                 {person.languages.map((language, index) => (
@@ -205,9 +184,12 @@ export default function About() {
 
           {about.work.display && (
             <>
-              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
-                {about.work.title}
-              </Heading>
+              <ClientHeading
+                translationKey="about.work"
+                id={about.work.title}
+                variant="display-strong-s"
+                marginBottom="m"
+              />
               <Column fillWidth gap="l" marginBottom="40">
                 {about.work.experiences.map((experience, index) => (
                   <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
@@ -284,14 +266,12 @@ export default function About() {
 
           {about.technical.display && (
             <>
-              <Heading
-                as="h2"
+              <ClientHeading
+                translationKey="about.skills"
                 id={about.technical.title}
                 variant="display-strong-s"
                 marginBottom="40"
-              >
-                {about.technical.title}
-              </Heading>
+              />
               <Column fillWidth gap="l">
                 {about.technical.skills.map((skill, index) => (
                   <Column key={`${skill}-${index}`} fillWidth gap="4">

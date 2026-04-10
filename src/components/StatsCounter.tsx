@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useSpring, useMotionValue } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
 import styles from "./StatsCounter.module.scss";
 
 type StatItem = {
@@ -14,14 +15,28 @@ type StatItem = {
 };
 
 const defaultStats: StatItem[] = [
-  { value: 7, prefix: "", suffix: "+", label: "Years", sublabel: "of experience", theme: "brand" },
-  { value: 1, prefix: "$", suffix: "M+", label: "ARR", sublabel: "product built", theme: "dark" },
+  {
+    value: 7,
+    prefix: "",
+    suffix: "+",
+    label: "stats.years.label",
+    sublabel: "stats.years.sublabel",
+    theme: "brand",
+  },
+  {
+    value: 1,
+    prefix: "$",
+    suffix: "M+",
+    label: "stats.arr.label",
+    sublabel: "stats.arr.sublabel",
+    theme: "dark",
+  },
   {
     value: 40,
     prefix: "",
     suffix: "+",
-    label: "Engineers",
-    sublabel: "led & mentored",
+    label: "stats.engineers.label",
+    sublabel: "stats.engineers.sublabel",
     theme: "light",
   },
 ];
@@ -76,10 +91,23 @@ const itemVariants = {
   },
 };
 
-export const StatsCounter = ({ items }: { items?: StatItem[] } = {}) => {
+export const StatsCounter = ({
+  items,
+  useTranslationKeys = true,
+}: { items?: StatItem[]; useTranslationKeys?: boolean } = {}) => {
+  const { t } = useLanguage();
   const stats = items || defaultStats;
+  const isDefaultStats = !items;
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  const resolveLabel = (label: string) => {
+    if (isDefaultStats || useTranslationKeys) {
+      const translated = t(label);
+      return translated !== label ? translated : label;
+    }
+    return label;
+  };
 
   return (
     <motion.div
@@ -105,8 +133,8 @@ export const StatsCounter = ({ items }: { items?: StatItem[] } = {}) => {
             />
           </div>
           <div className={styles.labelGroup}>
-            <span className={styles.label}>{stat.label}</span>
-            <span className={styles.sublabel}>{stat.sublabel}</span>
+            <span className={styles.label}>{resolveLabel(stat.label)}</span>
+            <span className={styles.sublabel}>{resolveLabel(stat.sublabel)}</span>
           </div>
         </motion.div>
       ))}

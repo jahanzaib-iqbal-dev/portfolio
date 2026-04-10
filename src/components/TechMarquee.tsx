@@ -1,6 +1,7 @@
 "use client";
 
 import { Column, Heading } from "@once-ui-system/core";
+import { useLanguage } from "@/i18n/LanguageContext";
 import styles from "./TechMarquee.module.scss";
 
 const techStack = [
@@ -97,12 +98,13 @@ const techStack = [
 ];
 
 export const TechMarquee = () => {
+  const { t } = useLanguage();
   const items = [...techStack, ...techStack];
 
   return (
     <Column fillWidth gap="24" horizontal="center">
       <Heading as="h2" variant="display-strong-xs">
-        Tools I Build With
+        {t("tools.title")}
       </Heading>
       <div className={styles.marqueeContainer}>
         <div className={styles.marqueeTrack}>

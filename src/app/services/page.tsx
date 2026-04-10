@@ -3,6 +3,7 @@
 import { Button, Column, Heading, Icon, Tag, Text, Meta, Row } from "@once-ui-system/core";
 import { baseURL, person } from "@/resources";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const services = {
   path: "/services",
@@ -12,51 +13,45 @@ const services = {
 
 const offerings = [
   {
-    title: "Your IT Partner",
+    titleKey: "services.offer1.title",
     icon: "globe" as const,
-    description:
-      "We become your dedicated tech team. You focus on the business, we handle everything from architecture to deployment.",
-    bestFor: "Startups without a CTO or in-house dev team.",
+    descKey: "services.offer1.desc",
+    bestForKey: "services.offer1.bestfor",
     tags: ["Architecture", "DevOps", "Full-Stack", "Cloud"],
   },
   {
-    title: "MVP Development",
+    titleKey: "services.offer2.title",
     icon: "rocket" as const,
-    description:
-      "From idea validation to launch-ready product. We build MVPs that are production-grade from day one — no throwaway code.",
-    bestFor: "Founders who need to ship fast and raise funding.",
+    descKey: "services.offer2.desc",
+    bestForKey: "services.offer2.bestfor",
     tags: ["Prototyping", "Product Strategy", "Launch"],
   },
   {
-    title: "Product Scaling",
+    titleKey: "services.offer3.title",
     icon: "arrowUpRight" as const,
-    description:
-      "Take your proven MVP to the next level. We re-architect, optimize, and scale your product for thousands of users.",
-    bestFor: "Startups post-funding that need to handle growth.",
+    descKey: "services.offer3.desc",
+    bestForKey: "services.offer3.bestfor",
     tags: ["Performance", "Microservices", "Infrastructure"],
   },
   {
-    title: "Team Augmentation",
+    titleKey: "services.offer4.title",
     icon: "person" as const,
-    description:
-      "Senior engineers embedded in your existing team. They work in your tools, your sprints, your codebase.",
-    bestFor: "Scaling fast, filling skill gaps, meeting deadlines.",
+    descKey: "services.offer4.desc",
+    bestForKey: "services.offer4.bestfor",
     tags: ["React", "Node.js", "Java", "DevOps"],
   },
   {
-    title: "AI & Intelligent Automation",
+    titleKey: "services.offer5.title",
     icon: "grid" as const,
-    description:
-      "AI agent development, MCP servers, RAG pipelines, and LLM integration using Claude, OpenAI, and Gemini.",
-    bestFor: "Companies looking to integrate AI into their products.",
+    descKey: "services.offer5.desc",
+    bestForKey: "services.offer5.bestfor",
     tags: ["LLM", "RAG", "Agents", "Automation"],
   },
   {
-    title: "UI/UX Design",
+    titleKey: "services.offer6.title",
     icon: "figma" as const,
-    description:
-      "User research, wireframing, high-fidelity prototyping in Figma, design systems, and responsive design.",
-    bestFor: "Products that need a polished, user-centered interface.",
+    descKey: "services.offer6.desc",
+    bestForKey: "services.offer6.bestfor",
     tags: ["Figma", "Design Systems", "Prototyping", "Research"],
   },
 ];
@@ -78,14 +73,15 @@ const cardVariants = {
 };
 
 export default function Services() {
+  const { t } = useLanguage();
   return (
     <Column maxWidth="m">
       <Column fillWidth>
         {/* Header */}
         <Column fillWidth minHeight="160" vertical="center" marginBottom="32">
-          <Heading variant="display-strong-xl">Services</Heading>
+          <Heading variant="display-strong-xl">{t("services.title")}</Heading>
           <Text variant="display-default-xs" onBackground="neutral-weak" marginTop="8">
-            Building world-class software for startups and scale-ups
+            {t("services.subtitle")}
           </Text>
         </Column>
 
@@ -93,7 +89,7 @@ export default function Services() {
         <motion.div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
             gap: "var(--static-space-20)",
             width: "100%",
             marginBottom: "var(--static-space-40)",
@@ -105,7 +101,7 @@ export default function Services() {
         >
           {offerings.map((offering, index) => (
             <motion.div
-              key={`${offering.title}-${index}`}
+              key={`${offering.titleKey}-${index}`}
               variants={cardVariants}
               whileHover={{
                 y: -8,
@@ -141,24 +137,24 @@ export default function Services() {
                     <Icon name={offering.icon} onBackground="brand-strong" size="s" />
                   </Column>
                   <Heading as="h2" variant="heading-strong-l">
-                    {offering.title}
+                    {t(offering.titleKey)}
                   </Heading>
                 </Row>
                 <Text variant="body-default-m" onBackground="neutral-weak">
-                  {offering.description}
+                  {t(offering.descKey)}
                 </Text>
                 <Row vertical="center" gap="8" wrap>
                   <Text variant="body-default-s" onBackground="brand-strong">
-                    Best for:
+                    {t("services.bestfor")}
                   </Text>
                   <Text variant="body-default-s" onBackground="neutral-weak">
-                    {offering.bestFor}
+                    {t(offering.bestForKey)}
                   </Text>
                 </Row>
                 {offering.tags.length > 0 && (
                   <Row wrap gap="8" style={{ marginTop: "auto" }}>
                     {offering.tags.map((tag, tagIndex) => (
-                      <Tag key={`${offering.title}-tag-${tagIndex}`} size="l">
+                      <Tag key={`${offering.titleKey}-tag-${tagIndex}`} size="l">
                         {tag}
                       </Tag>
                     ))}
@@ -188,7 +184,7 @@ export default function Services() {
             marginBottom="xl"
           >
             <Heading as="h2" variant="display-strong-s" align="center" wrap="balance">
-              Ready to build something great?
+              {t("services.cta.title")}
             </Heading>
             <Text
               variant="body-default-l"
@@ -196,12 +192,12 @@ export default function Services() {
               align="center"
               wrap="balance"
             >
-              Let&apos;s discuss your project and find the right engagement model for your team.
+              {t("services.cta.desc")}
             </Text>
             <Row paddingTop="12">
               <Button
                 href={`mailto:${person.email}`}
-                label="Let's Build Together"
+                label={t("services.cta.button")}
                 variant="primary"
                 size="l"
                 prefixIcon="email"
