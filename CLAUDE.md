@@ -149,10 +149,11 @@ home, person, grid, book, email, calendar, check, close, refresh,
 sparkle, search, arrowUpRight, chevronRight, chevronLeft, chevronUp,
 chevronDown, plus, minus, eye, eyeOff, link, copy, warning, info,
 danger, security, play, pause, globe, figma, github, linkedin,
-rocket, document, worldmark, flag, gift, symbol, paw, food, ball
+document, worldmark, flag, gift, symbol, paw, food, ball
 ```
 > `"menu"` does NOT exist — use an inline SVG for hamburger icons.
 > `"people"` does NOT exist — use `"person"`.
+> `"rocket"` does NOT exist — use `"sparkle"` for services-related icons.
 
 ### Responsive props
 Once UI components accept `s`, `m`, `l`, `xs` props for responsive styles:
@@ -231,6 +232,18 @@ Vercel auto-aliases to `jahanzaibiqbal.com` on every production deploy.
 | `/team` | Static | Team stats, capability cards |
 | `/contact` | Static | Calendly embed + contact links |
 | `/gallery` | Static | Photo gallery |
+
+---
+
+## Analytics
+
+| Tool | Status | Details |
+|------|--------|---------|
+| Microsoft Clarity | ✅ Live | Tracking ID: `wawkqu4rhg` — injected in `src/app/layout.tsx` |
+
+Clarity provides heatmaps + session recordings. No cookie banner needed. Data appears in dashboard within 24-48 hours of first install.
+
+To update the tracking ID — edit the `clarity-init` script block in `src/app/layout.tsx`.
 
 ---
 
